@@ -366,7 +366,7 @@ pub const FpsCounter = struct {
     }
 
     pub fn update(self: *FpsCounter, delta_ms: u32) void {
-        self.total_time -= self.frame_times[self.index];
+        self.total_time -|= self.frame_times[self.index];
         self.frame_times[self.index] = delta_ms;
         self.total_time += delta_ms;
         self.index = (self.index + 1) % 60;

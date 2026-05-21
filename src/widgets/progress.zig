@@ -129,8 +129,8 @@ pub const ProgressBar = struct {
             sub.setStyle(self.label_style orelse ctx.theme.text);
             const pct = self.getPercentage();
             var buf: [5]u8 = undefined;
-            const len = std.fmt.bufPrint(&buf, " {d:>3}%", .{pct}) catch 0;
-            sub.putString(buf[0..len]);
+            const pct_str = std.fmt.bufPrint(&buf, " {d:>3}%", .{pct}) catch "";
+            sub.putString(pct_str);
         }
     }
 
