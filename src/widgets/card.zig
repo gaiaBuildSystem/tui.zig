@@ -82,8 +82,10 @@ pub const Card = struct {
 
             // Separator
             sub.setStyle(self.style.setFg(Color.fromRGB(100, 100, 120)));
-            sub.moveCursor(1, y);
+            sub.moveCursor(0, y);
+            sub.putString(chars.left_t);
             for (1..sub.width - 1) |_| sub.putString(chars.horizontal);
+            sub.putString(chars.right_t);
             y += 1;
         }
 
@@ -104,8 +106,10 @@ pub const Card = struct {
 
             // Separator
             sub.setStyle(self.style.setFg(Color.fromRGB(100, 100, 120)));
-            sub.moveCursor(1, footer_y);
+            sub.moveCursor(0, footer_y);
+            sub.putString(chars.left_t);
             for (1..sub.width - 1) |_| sub.putString(chars.horizontal);
+            sub.putString(chars.right_t);
 
             // Footer text
             sub.setStyle(self.style.dim());

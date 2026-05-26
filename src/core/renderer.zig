@@ -95,9 +95,6 @@ pub const Renderer = struct {
         // Reset style at end
         try buf_writer.writeAll(terminal.Escape.reset);
 
-        // Show cursor if needed
-        try buf_writer.writeAll(terminal.Escape.show_cursor);
-
         // Write all output at once
         _ = try self.stdout.writeAll(self.output_buffer.items);
 
@@ -176,9 +173,7 @@ pub const Renderer = struct {
         const dy = @as(i32, y) - @as(i32, self.last_y);
 
         // Optimize cursor movement
-        if (dy == 0 and dx == 1) {
-            // Already at correct position (after writing a char)
-        } else if (dy == 0 and dx > 0 and dx < 8) {
+        if (dy == 0 and dx > 0 and dx < 8) {
             // Move right
             try writer.print("\x1b[{d}C", .{@as(u16, @intCast(dx))});
         } else if (dy == 0 and dx < 0 and dx > -8) {
